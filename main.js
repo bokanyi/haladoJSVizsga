@@ -16,6 +16,7 @@ class Project {
     
         this.oldestCarBtn.onclick = this.findOldestCar;
         this.after2004Btn.onclick = this.findCarsAfter2004;
+        this.searchCarBrandBtn.onclick = this.searchForCarBrand;
     }
 
     requestCars = async () => {
@@ -73,6 +74,32 @@ class Project {
 
             this.putCarsToTable(result);
         }
+    }
+
+    searchForCarBrand = async () =>{
+            const searchText = this.searchField.ariaValueMax.toLocaleLowerCase();
+            if(searchText.length > 0){
+
+                let cars = await this.requestCars();
+
+                let result = [];
+                for(let carData of cars){
+                    if(carData.brand.toLocaleLowerCase() == searchText) {
+                        result.push(carData);
+                    }
+                }
+
+                if(result.length > 0) {
+                    this.putCarsToTable(result);
+                } else {
+                    //nincs talalat
+                }
+
+
+            }else{
+                //ures mezo
+            }
+        
 
     }
 
