@@ -40,6 +40,13 @@ class Project {
 
 
     }
+
+    showErrorMsg = (errorMsg) => {
+        this.searchField.value = '';
+        this.resultTbody.innerHTML = '';
+        alert(errorMsg);
+    }
+
     findOldestCar = async () => {
         let cars = await this.requestCars();
         
@@ -77,7 +84,7 @@ class Project {
     }
 
     searchForCarBrand = async () =>{
-            const searchText = this.searchField.ariaValueMax.toLocaleLowerCase();
+            const searchText = this.searchField.value.toLocaleLowerCase();
             if(searchText.length > 0){
 
                 let cars = await this.requestCars();
@@ -93,11 +100,13 @@ class Project {
                     this.putCarsToTable(result);
                 } else {
                     //nincs talalat
+                    this.showErrorMsg('Nincs találat');
                 }
 
 
             }else{
                 //ures mezo
+                this.showErrorMsg('A beviteli mező üres');
             }
         
 
