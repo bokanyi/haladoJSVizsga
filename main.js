@@ -12,6 +12,12 @@ class Project {
         this.searchCarBrandBtn = document.getElementById('searchCarBrandBtn');
         this.resultTbody = document.getElementById('resultTbody');
     }
+
+    requestCars = async () => {
+        let respond = await fetch ('cars.json');
+        let cars = await respond.json();
+        return cars;
+    }
 }
 
 const ProjectObject = new Project();
